@@ -8,8 +8,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
-import com.fisei.athanasiaapp.objects.UserClient;
-import com.fisei.athanasiaapp.services.UserClientService;
+import com.fisei.athanasiaapp.objects.UserClient_MSJM;
+import com.fisei.athanasiaapp.services.UserClientService_MSJM;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -74,7 +74,7 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(URL... urls) {
             String tempToken = AthanasiaGlobal_MSJM.ACTUAL_USER.JWT;
-            AthanasiaGlobal_MSJM.ACTUAL_USER = UserClientService.GetUserInfoByID(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
+            AthanasiaGlobal_MSJM.ACTUAL_USER = UserClientService_MSJM.GetUserInfoByID(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             AthanasiaGlobal_MSJM.ACTUAL_USER.JWT = tempToken;
             return null;
         }
@@ -103,7 +103,7 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
         userEmail.setText("ADMIN");
     }
     private void LogOut(){
-        AthanasiaGlobal_MSJM.ACTUAL_USER = new UserClient();
+        AthanasiaGlobal_MSJM.ACTUAL_USER = new UserClient_MSJM();
         AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES = false;
         AthanasiaGlobal_MSJM.SHOPPING_CART = new ArrayList<>();
         Intent login = new Intent(this, LoginActivity_MSJM.class);

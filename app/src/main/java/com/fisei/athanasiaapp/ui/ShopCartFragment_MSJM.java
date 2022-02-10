@@ -20,9 +20,9 @@ import com.fisei.athanasiaapp.dialog.CheckoutDialogFragment_MSJM;
 import com.fisei.athanasiaapp.models.SaleDetails_MSJM;
 import com.fisei.athanasiaapp.models.SaleRequest_MSJM;
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
-import com.fisei.athanasiaapp.objects.ShopCartItem;
-import com.fisei.athanasiaapp.services.SaleService;
-import com.fisei.athanasiaapp.services.ShoppingCartService;
+import com.fisei.athanasiaapp.objects.ShopCartItem_MSJM;
+import com.fisei.athanasiaapp.services.SaleService_MSJM;
+import com.fisei.athanasiaapp.services.ShoppingCartService_MSJM;
 
 import org.json.JSONObject;
 
@@ -30,7 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopCartFragment extends Fragment {
+public class ShopCartFragment_MSJM extends Fragment {
 
     private ShopItemArrayAdapter_MSJM itemArrayAdapter;
     private ListView listView;
@@ -40,7 +40,7 @@ public class ShopCartFragment extends Fragment {
 
     private Boolean SuccesfulSale = false;
 
-    public ShopCartFragment() {
+    public ShopCartFragment_MSJM() {
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class ShopCartFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_shop_cart, container, false);
-        List<ShopCartItem> list = new ArrayList<>();
+        List<ShopCartItem_MSJM> list = new ArrayList<>();
         checkout = view.findViewById(R.id.btnCheckout);
         saveCart = view.findViewById(R.id.btnSaveCart);
         listView = (ListView) view.findViewById(R.id.listViewShopCartFragment);
@@ -85,7 +85,7 @@ public class ShopCartFragment extends Fragment {
     }
     private void UpdateTotalView(TextView totalView){
         double total = 0;
-        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+        for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             total += item.UnitPrice * item.Quantity;
         }
         total *= 1.1;
@@ -112,13 +112,13 @@ public class ShopCartFragment extends Fragment {
         protected JSONObject doInBackground(URL... params) {
             SaleRequest_MSJM sale = new SaleRequest_MSJM();
             List<SaleDetails_MSJM> details = new ArrayList<>();
-            for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+            for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
                 details.add(new SaleDetails_MSJM(item.Id, item.Quantity));
             }
             sale.UserClientID = AthanasiaGlobal_MSJM.ACTUAL_USER.ID;
             sale.SaleDetails_MSJM = details;
-            SuccesfulSale = SaleService.AddNewSale(sale);
-            ShoppingCartService.DeleteCart(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
+            SuccesfulSale = SaleService_MSJM.AddNewSale(sale);
+            ShoppingCartService_MSJM.DeleteCart(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             return null;
         }
         @Override
@@ -136,7 +136,7 @@ public class ShopCartFragment extends Fragment {
     class SaveCartTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            SuccesfulSale = ShoppingCartService.SaveCart(AthanasiaGlobal_MSJM.SHOPPING_CART, AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
+            SuccesfulSale = ShoppingCartService_MSJM.SaveCart(AthanasiaGlobal_MSJM.SHOPPING_CART, AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             return null;
         }
         @Override

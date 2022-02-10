@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AthanasiaGlobal_MSJM {
-    public static List<ShopCartItem> SHOPPING_CART = new ArrayList<>();
+    public static List<ShopCartItem_MSJM> SHOPPING_CART = new ArrayList<>();
 
-    public static UserClient ACTUAL_USER = new UserClient();
+    public static UserClient_MSJM ACTUAL_USER = new UserClient_MSJM();
     public static boolean ADMIN_PRIVILEGES = false;
 
 }

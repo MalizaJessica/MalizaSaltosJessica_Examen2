@@ -8,11 +8,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fisei.athanasiaapp.adapters.OrderDetailsArrayAdapter_MSJM;
-import com.fisei.athanasiaapp.objects.OrderDetail;
+import com.fisei.athanasiaapp.objects.OrderDetail_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.services.ProductService;
-import com.fisei.athanasiaapp.services.SaleService;
-import com.fisei.athanasiaapp.utilities.Utils;
+import com.fisei.athanasiaapp.services.ProductService_MSJM;
+import com.fisei.athanasiaapp.services.SaleService_MSJM;
+import com.fisei.athanasiaapp.utilities.Utils_MSJM;
 
 import org.json.JSONObject;
 
@@ -33,7 +33,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
     private OrderDetailsArrayAdapter_MSJM orderArrayAdapter;
 
     Bundle bundle;
-    private List<OrderDetail> orderDetails = new ArrayList<>();
+    private List<OrderDetail_MSJM> orderDetailMSJMS = new ArrayList<>();
     private List<Product> saleDetails;
 
     @Override
@@ -43,7 +43,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
         bundle = getIntent().getExtras();
         orderID = bundle.getInt("orderID");
         InitializeViewComponents();
-        orderArrayAdapter = new OrderDetailsArrayAdapter_MSJM(this, orderDetails);
+        orderArrayAdapter = new OrderDetailsArrayAdapter_MSJM(this, orderDetailMSJMS);
 
         GetOrderDetailsTask getOrderDetailsTask = new GetOrderDetailsTask();
         getOrderDetailsTask.execute();
@@ -52,7 +52,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
     class GetOrderDetailsTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            saleDetails = SaleService.GetSalesDetailsByID(orderID);
+            saleDetails = SaleService_MSJM.GetSalesDetailsByID(orderID);
             return null;
         }
         @Override
@@ -65,7 +65,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
         @Override
         protected JSONObject doInBackground(URL... params) {
             for (Product item: saleDetails) {
-                orderDetails.add(ConvertProductToOrderDetail(ProductService.GetSpecifiedProductByID(item.id), item.quantity));
+                orderDetailMSJMS.add(ConvertProductToOrderDetail(ProductService_MSJM.GetSpecifiedProductByID(item.id), item.quantity));
             }
             return null;
         }
@@ -76,8 +76,8 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
             //orderDetails.clear();
         }
     }
-    private OrderDetail ConvertProductToOrderDetail(Product product, int qty){
-        return new OrderDetail(product.name, qty, product.unitPrice, product.imageURL);
+    private OrderDetail_MSJM ConvertProductToOrderDetail(Product product, int qty){
+        return new OrderDetail_MSJM(product.name, qty, product.unitPrice, product.imageURL);
     }
     private void InitializeViewComponents(){
         textViewOrderID = (TextView) findViewById(R.id.textViewOrderInfoID);
@@ -91,7 +91,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
     private void FillOrderHeader(){
         textViewOrderID.setText(String.format("%s",bundle.getInt("orderID")));
         textViewOrderUserClient.setText(String.format("%s",bundle.getInt("orderUserClient")));
-        textViewOrderDate.setText(String.format("%s",Utils.ConvertDate(bundle.getString("orderDate"))));
+        textViewOrderDate.setText(String.format("%s", Utils_MSJM.ConvertDate(bundle.getString("orderDate"))));
         textViewOrderTotal.setText(String.format("%s",bundle.getDouble("orderTotal") + " $"));
         textViewOrderTotalIVA.setText(String.format("%.2f",bundle.getDouble("orderTotal") / 1.1 )+ " $");
     }

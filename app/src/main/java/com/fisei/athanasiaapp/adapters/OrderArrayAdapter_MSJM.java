@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.fisei.athanasiaapp.OrderDetailsActivity_MSJM;
 import com.fisei.athanasiaapp.R;
 import com.fisei.athanasiaapp.objects.Order_MSJM;
-import com.fisei.athanasiaapp.utilities.Utils;
+import com.fisei.athanasiaapp.utilities.Utils_MSJM;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class OrderArrayAdapter_MSJM extends ArrayAdapter<Order_MSJM> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.orderDateView.setText(Utils.ConvertDate(orderMSJM.Date));
+        viewHolder.orderDateView.setText(Utils_MSJM.ConvertDate(orderMSJM.Date));
         viewHolder.orderIDView.setText(String.format("%s", orderMSJM.ID));
         viewHolder.orderTotalView.setText(String.format("%s", orderMSJM.Total + " $"));
         viewHolder.orderInfoBtn.setOnClickListener(view -> {

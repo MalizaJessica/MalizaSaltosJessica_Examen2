@@ -1,6 +1,6 @@
 package com.fisei.athanasiaapp.objects;
 
-public class ShopCartItem {
+public class ShopCartItem_MSJM {
     public int Id;
     public String Name;
     public String ImageURL;
@@ -8,7 +8,7 @@ public class ShopCartItem {
     public double UnitPrice;
     public int MaxQty;
 
-    public ShopCartItem(int id, String name, String icon, int qty, double unitPrice, int maxQty){
+    public ShopCartItem_MSJM(int id, String name, String icon, int qty, double unitPrice, int maxQty){
         this.Id = id;
         this.Name = name;
         this.ImageURL = icon;
@@ -17,7 +17,7 @@ public class ShopCartItem {
         this.MaxQty = maxQty;
     }
 
-    public ShopCartItem(int id, int qty){
+    public ShopCartItem_MSJM(int id, int qty){
         this.Id = id;
         this.Quantity = qty;
     }

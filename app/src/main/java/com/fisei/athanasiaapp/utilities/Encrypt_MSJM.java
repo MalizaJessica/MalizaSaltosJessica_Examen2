@@ -4,7 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Encrypt {
+public class Encrypt_MSJM {
     public static String GetSHA256(String passwd){
         return bytesToHex(Encode(passwd));
     }

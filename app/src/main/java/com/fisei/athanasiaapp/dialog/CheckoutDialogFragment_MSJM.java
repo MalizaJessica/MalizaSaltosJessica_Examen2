@@ -8,7 +8,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import com.fisei.athanasiaapp.ui.ShopCartFragment;
+import com.fisei.athanasiaapp.ui.ShopCartFragment_MSJM;
 
 public class CheckoutDialogFragment_MSJM extends AppCompatDialogFragment {
     public Boolean button = false;
@@ -22,7 +22,7 @@ public class CheckoutDialogFragment_MSJM extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         try{
-                            ShopCartFragment quizFragment = (ShopCartFragment) getParentFragment();
+                            ShopCartFragment_MSJM quizFragment = (ShopCartFragment_MSJM) getParentFragment();
                             try{
                                 quizFragment.ExecuteSaleTask();
                             }catch (Exception e){

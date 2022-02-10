@@ -1,7 +1,7 @@
 package com.fisei.athanasiaapp.services;
 
-import com.fisei.athanasiaapp.objects.UserClient;
-import com.fisei.athanasiaapp.utilities.URLs;
+import com.fisei.athanasiaapp.objects.UserClient_MSJM;
+import com.fisei.athanasiaapp.utilities.URLs_MSJM;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,12 +14,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class UserAdminService {
-    public static UserClient Login(String email, String passwd){
-        UserClient user = new UserClient();
+public class UserAdminService_MSJM {
+    public static UserClient_MSJM Login(String email, String passwd){
+        UserClient_MSJM user = new UserClient_MSJM();
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(URLs.LOGIN_ADMIN);
+            URL url = new URL(URLs_MSJM.LOGIN_ADMIN);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");

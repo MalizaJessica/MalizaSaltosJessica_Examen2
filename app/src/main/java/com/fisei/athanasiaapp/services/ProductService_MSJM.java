@@ -1,7 +1,6 @@
 package com.fisei.athanasiaapp.services;
 
-import com.fisei.athanasiaapp.objects.OrderDetail;
-import com.fisei.athanasiaapp.utilities.URLs;
+import com.fisei.athanasiaapp.utilities.URLs_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
 
 import org.json.JSONArray;
@@ -17,12 +16,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductService {
+public class ProductService_MSJM {
     public static List<Product> GetAllProducts(){
         List<Product> productList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.PRODUCTS);
+            URL url = new URL(URLs_MSJM.PRODUCTS);
             connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
@@ -44,7 +43,7 @@ public class ProductService {
                             products.getInt("quantity"),
                             products.getDouble("unitPrice"),
                             products.getDouble("cost"),
-                            URLs.PRODUCTS_IMAGES + products.getString("imageURL")));
+                            URLs_MSJM.PRODUCTS_IMAGES + products.getString("imageURL")));
                 }
             }
         } catch (IOException | JSONException e) {
@@ -60,7 +59,7 @@ public class ProductService {
         Product product = new Product(0, "", "", 0, 0, 0, "");
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.PRODUCTS + "/" + id);
+            URL url = new URL(URLs_MSJM.PRODUCTS + "/" + id);
             connection = (HttpURLConnection) url.openConnection();
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
@@ -82,7 +81,7 @@ public class ProductService {
                             products.getInt("quantity"),
                             products.getDouble("unitPrice"),
                             products.getDouble("cost"),
-                            URLs.PRODUCTS_IMAGES + products.getString("imageURL"));
+                            URLs_MSJM.PRODUCTS_IMAGES + products.getString("imageURL"));
                 }
             }
         } catch (IOException | JSONException e) {

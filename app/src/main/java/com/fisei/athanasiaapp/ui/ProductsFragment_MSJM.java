@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.fisei.athanasiaapp.R;
 import com.fisei.athanasiaapp.adapters.ProductArrayAdapter_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.services.ProductService;
+import com.fisei.athanasiaapp.services.ProductService_MSJM;
 
 import org.json.JSONObject;
 
@@ -21,17 +21,17 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsFragment extends Fragment {
+public class ProductsFragment_MSJM extends Fragment {
 
     private List<Product> productList = new ArrayList<>();
     private ProductArrayAdapter_MSJM productArrayAdapterMSJM;
 
     private ListView listView;
 
-    public ProductsFragment() {
+    public ProductsFragment_MSJM() {
     }
-    public static ProductsFragment newInstance(String param1, String param2) {
-        ProductsFragment fragment = new ProductsFragment();
+    public static ProductsFragment_MSJM newInstance(String param1, String param2) {
+        ProductsFragment_MSJM fragment = new ProductsFragment_MSJM();
         return fragment;
     }
     @Override
@@ -56,7 +56,7 @@ public class ProductsFragment extends Fragment {
         @Override
         protected JSONObject doInBackground(URL... params) {
             productList.clear();
-            productList = ProductService.GetAllProducts();
+            productList = ProductService_MSJM.GetAllProducts();
             productList = QuitProductsWith0Qty(productList);
             return null;
         }

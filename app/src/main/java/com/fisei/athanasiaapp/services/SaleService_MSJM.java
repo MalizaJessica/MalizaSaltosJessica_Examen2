@@ -6,7 +6,7 @@ import com.fisei.athanasiaapp.models.SaleRequest_MSJM;
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.Order_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.utilities.URLs;
+import com.fisei.athanasiaapp.utilities.URLs_MSJM;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,12 +22,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaleService {
+public class SaleService_MSJM {
     public static List<Order_MSJM> GetAllSales(){
         List<Order_MSJM> orderMSJMList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SALES);
+            URL url = new URL(URLs_MSJM.SALES);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
@@ -63,7 +63,7 @@ public class SaleService {
         List<Order_MSJM> orderMSJMList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SALES + "/" + AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
+            URL url = new URL(URLs_MSJM.SALES + "/" + AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
@@ -99,7 +99,7 @@ public class SaleService {
         List<Product> orderList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SALE_DETAILS + id);
+            URL url = new URL(URLs_MSJM.SALE_DETAILS + id);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
@@ -134,7 +134,7 @@ public class SaleService {
     public static boolean AddNewSale(SaleRequest_MSJM sale){
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(URLs.SALES);
+            URL url = new URL(URLs_MSJM.SALES);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");

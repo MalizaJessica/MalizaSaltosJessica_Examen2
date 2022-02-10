@@ -1,6 +1,6 @@
 package com.fisei.athanasiaapp.utilities;
 
-public class Utils {
+public class Utils_MSJM {
 
     public static String ConvertDate(String date){
         String dateConverted = "";

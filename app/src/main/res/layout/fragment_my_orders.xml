@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MyOrdersFragment">
+    tools:context=".ui.MyOrdersFragment_MSJM">
     <ListView
         android:id="@+id/listViewMyOrdersFragment"
         android:layout_width="match_parent"

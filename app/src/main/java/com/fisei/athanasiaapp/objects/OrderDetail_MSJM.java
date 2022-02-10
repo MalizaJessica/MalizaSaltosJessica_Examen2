@@ -1,12 +1,12 @@
 package com.fisei.athanasiaapp.objects;
 
-public class OrderDetail {
+public class OrderDetail_MSJM {
     public String Name;
     public int Quantity;
     public double UnitPrice;
     public String ImageURL;
 
-    public OrderDetail(String name, int qty, double uP, String imageURL){
+    public OrderDetail_MSJM(String name, int qty, double uP, String imageURL){
         this.Name = name;
         this.Quantity = qty;
         this.UnitPrice = uP;

@@ -1,6 +1,6 @@
 package com.fisei.athanasiaapp.utilities;
 
-public class URLs {
+public class URLs_MSJM {
     //Client
     public static final String LOGIN = "http://nilats-001-site1.itempurl.com/api/userClient/login";
     public static final String LOGIN_ADMIN = "http://nilats-001-site1.itempurl.com/api/userAdmin/login";

@@ -15,15 +15,15 @@ import androidx.annotation.NonNull;
 
 import com.fisei.athanasiaapp.R;
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
-import com.fisei.athanasiaapp.objects.ShopCartItem;
-import com.fisei.athanasiaapp.services.ImageService;
+import com.fisei.athanasiaapp.objects.ShopCartItem_MSJM;
+import com.fisei.athanasiaapp.services.ImageService_MSJM;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
+public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem_MSJM> {
     private static class ViewHolder{
         ImageView shopCartItemImage;
         TextView shopCartItemName;
@@ -34,11 +34,11 @@ public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
         Button shopCartDeleteItem;
     }
     private Map<String, Bitmap> bitmaps = new HashMap<>();
-    public ShopItemArrayAdapter_MSJM(@NonNull Context context, List<ShopCartItem> itemList) {
+    public ShopItemArrayAdapter_MSJM(@NonNull Context context, List<ShopCartItem_MSJM> itemList) {
         super(context, -1, itemList);
     }
     public View getView(int positon, View convertView, ViewGroup parent){
-        ShopCartItem item = getItem(positon);
+        ShopCartItem_MSJM item = getItem(positon);
         ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
@@ -76,7 +76,7 @@ public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
         }
         @Override
         protected Bitmap doInBackground(String... params){
-            Bitmap bitmap = ImageService.GetImageByURL(params[0]);
+            Bitmap bitmap = ImageService_MSJM.GetImageByURL(params[0]);
             bitmaps.put(params[0], bitmap);
             return bitmap;
         }
@@ -87,7 +87,7 @@ public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
     }
 
     private void AddQty(int id, int qty){
-        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+        for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             if(item.Id == id && item.Quantity < qty){
                 item.Quantity++;
                 break;
@@ -96,7 +96,7 @@ public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
         UpdateArrayAdapter();
     }
     private void ReduceQty(int id){
-        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+        for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             if(item.Id == id && item.Quantity > 1){
                 item.Quantity--;
                 break;
@@ -114,7 +114,7 @@ public class ShopItemArrayAdapter_MSJM extends ArrayAdapter<ShopCartItem> {
         UpdateArrayAdapter();
     }
     public void UpdateArrayAdapter(){
-        List<ShopCartItem> list = new ArrayList<>();
+        List<ShopCartItem_MSJM> list = new ArrayList<>();
         this.clear();
         list = AthanasiaGlobal_MSJM.SHOPPING_CART;
         this.addAll(list);

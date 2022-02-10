@@ -2,9 +2,9 @@ package com.fisei.athanasiaapp.services;
 
 import com.fisei.athanasiaapp.models.ResponseAthanasia_MSJM;
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
-import com.fisei.athanasiaapp.utilities.URLs;
-import com.fisei.athanasiaapp.objects.UserClient;
-import com.fisei.athanasiaapp.utilities.Utils;
+import com.fisei.athanasiaapp.utilities.URLs_MSJM;
+import com.fisei.athanasiaapp.objects.UserClient_MSJM;
+import com.fisei.athanasiaapp.utilities.Utils_MSJM;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,13 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-public class UserClientService {
+public class UserClientService_MSJM {
 
-    public static UserClient Login(String email, String passwd){
-        UserClient user = new UserClient();
+    public static UserClient_MSJM Login(String email, String passwd){
+        UserClient_MSJM user = new UserClient_MSJM();
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(URLs.LOGIN);
+            URL url = new URL(URLs_MSJM.LOGIN);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -62,11 +62,11 @@ public class UserClientService {
         }
         return user;
     }
-    public static UserClient GetUserInfoByID(int id){
-        UserClient user = new UserClient();
+    public static UserClient_MSJM GetUserInfoByID(int id){
+        UserClient_MSJM user = new UserClient_MSJM();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.CLIENT_BY_ID + id);
+            URL url = new URL(URLs_MSJM.CLIENT_BY_ID + id);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
@@ -94,11 +94,11 @@ public class UserClientService {
         }
         return user;
     }
-    public static ResponseAthanasia_MSJM SignUpNewUser(UserClient newUser, String newPasswd){
+    public static ResponseAthanasia_MSJM SignUpNewUser(UserClient_MSJM newUser, String newPasswd){
         ResponseAthanasia_MSJM responseAth = new ResponseAthanasia_MSJM(false, "An unexpected error ocurred");
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SIGN_UP);
+            URL url = new URL(URLs_MSJM.SIGN_UP);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -138,16 +138,16 @@ public class UserClientService {
                 responseAth.Message = "";
                 boolean emailError = false;
                 try{
-                    responseAth.Message += Utils.CleanString(errors.getString("email"));
+                    responseAth.Message += Utils_MSJM.CleanString(errors.getString("email"));
                     emailError = true;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 try{
                     if (emailError){
-                        responseAth.Message += "\n" + Utils.CleanString(errors.getString("cedula"));
+                        responseAth.Message += "\n" + Utils_MSJM.CleanString(errors.getString("cedula"));
                     } else {
-                        responseAth.Message += Utils.CleanString(errors.getString("cedula"));
+                        responseAth.Message += Utils_MSJM.CleanString(errors.getString("cedula"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

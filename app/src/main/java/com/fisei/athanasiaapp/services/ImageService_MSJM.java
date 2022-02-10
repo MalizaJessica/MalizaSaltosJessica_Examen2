@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ImageService {
+public class ImageService_MSJM {
 
     public static Bitmap GetImageByURL(String url){
         Bitmap bitmap = null;

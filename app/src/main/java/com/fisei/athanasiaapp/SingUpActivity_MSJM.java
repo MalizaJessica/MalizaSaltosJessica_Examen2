@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fisei.athanasiaapp.models.ResponseAthanasia_MSJM;
-import com.fisei.athanasiaapp.objects.UserClient;
-import com.fisei.athanasiaapp.services.UserClientService;
+import com.fisei.athanasiaapp.objects.UserClient_MSJM;
+import com.fisei.athanasiaapp.services.UserClientService_MSJM;
 
 import org.json.JSONObject;
 
@@ -41,10 +41,10 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
     private class SignUpTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            UserClient newUser = new UserClient(0, editTextName.getText().toString(),
+            UserClient_MSJM newUser = new UserClient_MSJM(0, editTextName.getText().toString(),
                     editTextEmail.getText().toString() + "@ath.com",
                     editTextCedula.getText().toString(), "");
-            responseTask = UserClientService.SignUpNewUser(newUser, editTextPassword.getText().toString());
+            responseTask = UserClientService_MSJM.SignUpNewUser(newUser, editTextPassword.getText().toString());
             return null;
         }
         @Override

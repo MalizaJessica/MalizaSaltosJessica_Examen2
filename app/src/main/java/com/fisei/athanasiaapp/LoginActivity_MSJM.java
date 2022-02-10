@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.objects.ShopCartItem;
-import com.fisei.athanasiaapp.objects.UserClient;
-import com.fisei.athanasiaapp.services.ProductService;
-import com.fisei.athanasiaapp.services.ShoppingCartService;
-import com.fisei.athanasiaapp.services.UserAdminService;
-import com.fisei.athanasiaapp.services.UserClientService;
+import com.fisei.athanasiaapp.objects.ShopCartItem_MSJM;
+import com.fisei.athanasiaapp.objects.UserClient_MSJM;
+import com.fisei.athanasiaapp.services.ProductService_MSJM;
+import com.fisei.athanasiaapp.services.ShoppingCartService_MSJM;
+import com.fisei.athanasiaapp.services.UserAdminService_MSJM;
+import com.fisei.athanasiaapp.services.UserClientService_MSJM;
 import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class LoginActivity_MSJM extends AppCompatActivity {
     private EditText passwdEditText;
     private TextView warningTextView;
 
-    private UserClient user;
+    private UserClient_MSJM user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class LoginActivity_MSJM extends AppCompatActivity {
     private class LoginTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            user = UserClientService.Login(emailEditText.getText().toString(), passwdEditText.getText().toString());
+            user = UserClientService_MSJM.Login(emailEditText.getText().toString(), passwdEditText.getText().toString());
             return null;
         }
         @Override
@@ -72,7 +72,7 @@ public class LoginActivity_MSJM extends AppCompatActivity {
     private class LoginAdminTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            user = UserAdminService.Login(emailEditText.getText().toString(), passwdEditText.getText().toString());
+            user = UserAdminService_MSJM.Login(emailEditText.getText().toString(), passwdEditText.getText().toString());
             return null;
         }
 
@@ -90,14 +90,14 @@ public class LoginActivity_MSJM extends AppCompatActivity {
     private class GetUserCartTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            AthanasiaGlobal_MSJM.SHOPPING_CART = ShoppingCartService.GetShopCartFromUserLogged(user.ID);
-            List<ShopCartItem> tempList = new ArrayList<>();
-            for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
-                Product p = ProductService.GetSpecifiedProductByID(item.Id);
+            AthanasiaGlobal_MSJM.SHOPPING_CART = ShoppingCartService_MSJM.GetShopCartFromUserLogged(user.ID);
+            List<ShopCartItem_MSJM> tempList = new ArrayList<>();
+            for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+                Product p = ProductService_MSJM.GetSpecifiedProductByID(item.Id);
                 if(p.quantity < item.Quantity){
                     item.Quantity = 1;
                 }
-                tempList.add(new ShopCartItem(p.id, p.name, p.imageURL, item.Quantity, p.unitPrice, p.quantity));
+                tempList.add(new ShopCartItem_MSJM(p.id, p.name, p.imageURL, item.Quantity, p.unitPrice, p.quantity));
             }
             AthanasiaGlobal_MSJM.SHOPPING_CART = tempList;
             return null;

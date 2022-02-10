@@ -1,8 +1,8 @@
 package com.fisei.athanasiaapp.services;
 
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
-import com.fisei.athanasiaapp.objects.ShopCartItem;
-import com.fisei.athanasiaapp.utilities.URLs;
+import com.fisei.athanasiaapp.objects.ShopCartItem_MSJM;
+import com.fisei.athanasiaapp.utilities.URLs_MSJM;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,12 +18,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartService {
-    public static List<ShopCartItem> GetShopCartFromUserLogged(int user){
-        List<ShopCartItem> toReturn = new ArrayList<>();
+public class ShoppingCartService_MSJM {
+    public static List<ShopCartItem_MSJM> GetShopCartFromUserLogged(int user){
+        List<ShopCartItem_MSJM> toReturn = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SHOPPING_CART + "/" + user);
+            URL url = new URL(URLs_MSJM.SHOPPING_CART + "/" + user);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
@@ -39,7 +39,7 @@ public class ShoppingCartService {
                 JSONArray list = data.getJSONArray("data");
                 for(int i = 0; i < list.length(); ++i){
                     JSONObject orders = list.getJSONObject(i);
-                    toReturn.add(new ShopCartItem(
+                    toReturn.add(new ShopCartItem_MSJM(
                             orders.getInt("idproduct"),
                             orders.getInt("quantity")));
                 }
@@ -56,7 +56,7 @@ public class ShoppingCartService {
     public static Boolean DeleteCart(int user){
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(URLs.SHOPPING_CART + "/" + user);
+            URL url = new URL(URLs_MSJM.SHOPPING_CART + "/" + user);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("DELETE");
             connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
@@ -82,10 +82,10 @@ public class ShoppingCartService {
         }
         return false;
     }
-    public static Boolean SaveCart(List<ShopCartItem> cart, int user){
+    public static Boolean SaveCart(List<ShopCartItem_MSJM> cart, int user){
         HttpURLConnection connection = null;
         try {
-            URL url = new URL(URLs.SHOPPING_CART);
+            URL url = new URL(URLs_MSJM.SHOPPING_CART);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -94,7 +94,7 @@ public class ShoppingCartService {
             connection.setDoInput(true);
             String jsonInputPart1 = "{\"IDUserClient\": " + user + ",\"ShopCartDetails\":[";
             StringBuilder jsonInputPart2 = new StringBuilder();
-            for(ShopCartItem item: cart){
+            for(ShopCartItem_MSJM item: cart){
                 jsonInputPart2.append("{\"IDProduct\": " + item.Id +
                         ",\"Quantity\": " + item.Quantity +
                         "},");

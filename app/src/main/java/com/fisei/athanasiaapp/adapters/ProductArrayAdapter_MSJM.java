@@ -18,8 +18,8 @@ import java.util.Map;
 import com.fisei.athanasiaapp.R;
 import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.objects.ShopCartItem;
-import com.fisei.athanasiaapp.services.ImageService;
+import com.fisei.athanasiaapp.objects.ShopCartItem_MSJM;
+import com.fisei.athanasiaapp.services.ImageService_MSJM;
 
 public class ProductArrayAdapter_MSJM extends ArrayAdapter<Product> {
 
@@ -79,7 +79,7 @@ public class ProductArrayAdapter_MSJM extends ArrayAdapter<Product> {
         }
         @Override
         protected Bitmap doInBackground(String... params){
-            Bitmap bitmap = ImageService.GetImageByURL(params[0]);
+            Bitmap bitmap = ImageService_MSJM.GetImageByURL(params[0]);
             bitmaps.put(params[0], bitmap);
             return bitmap;
         }
@@ -92,7 +92,7 @@ public class ProductArrayAdapter_MSJM extends ArrayAdapter<Product> {
             btn.setEnabled(b);
     }
     private Boolean RememberIfButtonWasSelected(int id){
-        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+        for (ShopCartItem_MSJM item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             if (item.Id == id) {
                 return false;
             }
@@ -100,7 +100,7 @@ public class ProductArrayAdapter_MSJM extends ArrayAdapter<Product> {
         return true;
     }
     private void AddToShoppingCart(Product p){
-        AthanasiaGlobal_MSJM.SHOPPING_CART.add(new ShopCartItem(p.id, p.name, p.imageURL, 1, p.unitPrice, p.quantity));
+        AthanasiaGlobal_MSJM.SHOPPING_CART.add(new ShopCartItem_MSJM(p.id, p.name, p.imageURL, 1, p.unitPrice, p.quantity));
         Toast.makeText(getContext(), "Item " + p.name + " added to cart", Toast.LENGTH_SHORT).show();
     }
 }
