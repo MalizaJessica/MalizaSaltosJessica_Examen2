@@ -71,6 +71,9 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
                 editTextCedula.getText().toString().isEmpty() || editTextPassword.getText().toString().isEmpty()){
             errorTextView.setText(R.string.fields_empty_error);
         } else {
+            if(){
+
+            }
             errorTextView.setText("");
             SignUpTask signUpTask = new SignUpTask();
             signUpTask.execute();
