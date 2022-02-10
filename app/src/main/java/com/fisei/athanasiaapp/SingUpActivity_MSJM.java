@@ -78,25 +78,23 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
                 if(!password.matches("?=.*[0-9])")){
                     errorTextView.setText("La contrasenia debe tener numeros");
                     return false;
-                }else{
-                if(!password.matches("?=.*[a-z])")){
-                    errorTextView.setText("La contrasenia debe tener letras minusculas");
-                    return false;
-                }else{
-
-
-                if(!password.matches("?=.*[A-Z])")){
-                    errorTextView.setText("La contrasenia debe tener letras mayusculas");
-                    return false;
-                }
-                else{
-                    if (!password.matches("(?=.*[*?¡!#$%&])")) {
-                        errorTextView.setText("Sin caracter especial reconocido");
+                }else {
+                    if (!password.matches("?=.*[a-z])")) {
+                        errorTextView.setText("La contrasenia debe tener letras minusculas");
                         return false;
-                }
 
-                
-            }
+                    } else {
+                        if (!password.matches("?=.*[A-Z])")) {
+                            errorTextView.setText("La contrasenia debe tener letras mayusculas");
+                            return false;
+                        } else {
+                            if (!password.matches("(?=.*[*?¡!#$%&])")) {
+                                errorTextView.setText("La contrasenia debe tener caracter especial");
+                                return false;
+                            }
+                        }
+                    }
+                }
             errorTextView.setText("");
             SignUpTask signUpTask = new SignUpTask();
             signUpTask.execute();
