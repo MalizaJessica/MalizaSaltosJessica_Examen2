@@ -71,9 +71,9 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
                 editTextCedula.getText().toString().isEmpty() || editTextPassword.getText().toString().isEmpty()){
             errorTextView.setText(R.string.fields_empty_error);
         } else {
-            if(){
-
-            }
+            if(editTextPassword.getText().toString().length()<6 || editTextPassword.getText().toString().length()>10){
+                errorTextView.setText("La contrasenia esta incorrecta");
+            }else{
             errorTextView.setText("");
             SignUpTask signUpTask = new SignUpTask();
             signUpTask.execute();
