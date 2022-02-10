@@ -71,12 +71,25 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
                 editTextCedula.getText().toString().isEmpty() || editTextPassword.getText().toString().isEmpty()){
             errorTextView.setText(R.string.fields_empty_error);
         } else {
-            if(editTextPassword.getText().toString().length()<6 || editTextPassword.getText().toString().length()>10){
-                errorTextView.setText("La contrasenia esta incorrecta");
+             String password=editTextPassword.getText().toString();
+            if(password.length()<6 || password.length()>10){
+                errorTextView.setText("La contrasenia esta incorrecta debe tener minimo 6 y maximo 10");
             }else{
-                if(!contrasenia){
-
+                if(!password.matches("?=.*[0-9])")){
+                    errorTextView.setText("La contrasenia debe tener numeros");
                 }
+                if(!password.matches("?=.*[a-z])")){
+                    errorTextView.setText("La contrasenia debe tener letras minusculas");
+                }
+                if(!password.matches("?=.*[A-Z])")){
+                    errorTextView.setText("La contrasenia debe tener letras mayusculas");
+                }
+                else{
+                    if (!password.matches("(?=.*[*?¡!#$%&])")) {
+                        etPassword.setError("Sin caracter especial reconocido");
+                        okpassword = false;
+                }
+
                 
             }
             errorTextView.setText("contrasenia correcta");
