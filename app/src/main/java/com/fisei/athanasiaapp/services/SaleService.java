@@ -1,11 +1,10 @@
 package com.fisei.athanasiaapp.services;
 
 
-import com.fisei.athanasiaapp.models.SaleDetails;
-import com.fisei.athanasiaapp.models.SaleRequest;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
-import com.fisei.athanasiaapp.objects.Order;
-import com.fisei.athanasiaapp.objects.OrderDetail;
+import com.fisei.athanasiaapp.models.SaleDetails_MSJM;
+import com.fisei.athanasiaapp.models.SaleRequest_MSJM;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
+import com.fisei.athanasiaapp.objects.Order_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
 import com.fisei.athanasiaapp.utilities.URLs;
 
@@ -24,13 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SaleService {
-    public static List<Order> GetAllSales(){
-        List<Order> orderList = new ArrayList<>();
+    public static List<Order_MSJM> GetAllSales(){
+        List<Order_MSJM> orderMSJMList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
             URL url = new URL(URLs.SALES);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
             if(responseCode == HttpURLConnection.HTTP_OK){
@@ -44,7 +43,7 @@ public class SaleService {
                 JSONArray list = data.getJSONArray("data");
                 for(int i = 0; i < list.length(); ++i){
                     JSONObject orders = list.getJSONObject(i);
-                    orderList.add(new Order(
+                    orderMSJMList.add(new Order_MSJM(
                             orders.getInt("id"),
                             orders.getString("date"),
                             orders.getInt("iduserClient"),
@@ -58,15 +57,15 @@ public class SaleService {
                 connection.disconnect();
             }
         }
-        return orderList;
+        return orderMSJMList;
     }
-    public static List<Order> GetSalesByUserID(){
-        List<Order> orderList = new ArrayList<>();
+    public static List<Order_MSJM> GetSalesByUserID(){
+        List<Order_MSJM> orderMSJMList = new ArrayList<>();
         HttpURLConnection connection = null;
         try{
-            URL url = new URL(URLs.SALES + "/" + AthanasiaGlobal.ACTUAL_USER.ID);
+            URL url = new URL(URLs.SALES + "/" + AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
             if(responseCode == HttpURLConnection.HTTP_OK){
@@ -80,7 +79,7 @@ public class SaleService {
                 JSONArray list = data.getJSONArray("data");
                 for(int i = 0; i < list.length(); ++i){
                     JSONObject orders = list.getJSONObject(i);
-                    orderList.add(new Order(
+                    orderMSJMList.add(new Order_MSJM(
                             orders.getInt("id"),
                             orders.getString("date"),
                             orders.getInt("iduserClient"),
@@ -94,7 +93,7 @@ public class SaleService {
                 connection.disconnect();
             }
         }
-        return orderList;
+        return orderMSJMList;
     }
     public static List<Product> GetSalesDetailsByID(int id){
         List<Product> orderList = new ArrayList<>();
@@ -102,7 +101,7 @@ public class SaleService {
         try{
             URL url = new URL(URLs.SALE_DETAILS + id);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
             if(responseCode == HttpURLConnection.HTTP_OK){
@@ -132,7 +131,7 @@ public class SaleService {
         }
         return orderList;
     }
-    public static boolean AddNewSale(SaleRequest sale){
+    public static boolean AddNewSale(SaleRequest_MSJM sale){
         HttpURLConnection connection = null;
         try {
             URL url = new URL(URLs.SALES);
@@ -140,11 +139,11 @@ public class SaleService {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             connection.setDoInput(true);
             String jsonInputPart1 = "{\"IDUserClient\": " + sale.UserClientID + ",\"saleDetails\":[";
             StringBuilder jsonInputPart2 = new StringBuilder();
-            for(SaleDetails detail: sale.SaleDetails){
+            for(SaleDetails_MSJM detail: sale.SaleDetails_MSJM){
                 jsonInputPart2.append("{\"IDProduct\": " + detail.ProductID +
                         ",\"Quantity\": " + detail.Quantity +
                         "},");

@@ -11,12 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.fisei.athanasiaapp.R;
-import com.fisei.athanasiaapp.adapters.OrderArrayAdapter;
-import com.fisei.athanasiaapp.adapters.ProductArrayAdapter;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
-import com.fisei.athanasiaapp.objects.Order;
-import com.fisei.athanasiaapp.objects.Product;
-import com.fisei.athanasiaapp.services.ProductService;
+import com.fisei.athanasiaapp.adapters.OrderArrayAdapter_MSJM;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
+import com.fisei.athanasiaapp.objects.Order_MSJM;
 import com.fisei.athanasiaapp.services.SaleService;
 
 import org.json.JSONObject;
@@ -27,8 +24,8 @@ import java.util.List;
 
 public class MyOrdersFragment extends Fragment {
 
-    private List<Order> myOrderList = new ArrayList<>();
-    private OrderArrayAdapter orderArrayAdapter;
+    private List<Order_MSJM> myOrderMSJMList = new ArrayList<>();
+    private OrderArrayAdapter_MSJM orderArrayAdapterMSJM;
     private ListView listView;
     private Bundle bundle = new Bundle();
 
@@ -48,7 +45,7 @@ public class MyOrdersFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_my_orders, container, false);
         listView = (ListView) view.findViewById(R.id.listViewMyOrdersFragment);
-        orderArrayAdapter = new OrderArrayAdapter(getContext(), myOrderList);
+        orderArrayAdapterMSJM = new OrderArrayAdapter_MSJM(getContext(), myOrderMSJMList);
         GetOrderTask getOrderTask = new GetOrderTask();
         getOrderTask.execute();
 
@@ -57,20 +54,20 @@ public class MyOrdersFragment extends Fragment {
     class GetOrderTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            myOrderList.clear();
-            if(AthanasiaGlobal.ADMIN_PRIVILEGES){
-                myOrderList = SaleService.GetAllSales();
+            myOrderMSJMList.clear();
+            if(AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES){
+                myOrderMSJMList = SaleService.GetAllSales();
             } else {
-                myOrderList = SaleService.GetSalesByUserID();
+                myOrderMSJMList = SaleService.GetSalesByUserID();
             }
             return null;
         }
         @Override
         protected void onPostExecute(JSONObject jsonObject){
-            orderArrayAdapter.clear();
-            orderArrayAdapter.addAll(myOrderList);
-            orderArrayAdapter.notifyDataSetChanged();
-            listView.setAdapter(orderArrayAdapter);
+            orderArrayAdapterMSJM.clear();
+            orderArrayAdapterMSJM.addAll(myOrderMSJMList);
+            orderArrayAdapterMSJM.notifyDataSetChanged();
+            listView.setAdapter(orderArrayAdapterMSJM);
         }
     }
 }

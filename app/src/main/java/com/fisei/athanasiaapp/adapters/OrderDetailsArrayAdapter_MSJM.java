@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrderDetailsArrayAdapter extends ArrayAdapter<OrderDetail> {
+public class OrderDetailsArrayAdapter_MSJM extends ArrayAdapter<OrderDetail> {
     private static class ViewHolder{
         TextView orderDetailNameTextView;
         TextView orderDetailQuantityTextView;
@@ -26,7 +26,7 @@ public class OrderDetailsArrayAdapter extends ArrayAdapter<OrderDetail> {
         ImageView orderDetailImageView;
     }
     private final Map<String, Bitmap> bitmaps = new HashMap<>();
-    public OrderDetailsArrayAdapter(Context context, List<OrderDetail> orderDetailList){
+    public OrderDetailsArrayAdapter_MSJM(Context context, List<OrderDetail> orderDetailList){
         super(context, -1, orderDetailList);
     }
     public View getView(int position, View convertView, ViewGroup parent){

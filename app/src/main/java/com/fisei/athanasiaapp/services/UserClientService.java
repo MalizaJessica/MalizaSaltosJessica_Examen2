@@ -1,7 +1,7 @@
 package com.fisei.athanasiaapp.services;
 
-import com.fisei.athanasiaapp.models.ResponseAthanasia;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
+import com.fisei.athanasiaapp.models.ResponseAthanasia_MSJM;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.utilities.URLs;
 import com.fisei.athanasiaapp.objects.UserClient;
 import com.fisei.athanasiaapp.utilities.Utils;
@@ -68,7 +68,7 @@ public class UserClientService {
         try{
             URL url = new URL(URLs.CLIENT_BY_ID + id);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
             if(responseCode == HttpURLConnection.HTTP_OK){
@@ -94,8 +94,8 @@ public class UserClientService {
         }
         return user;
     }
-    public static ResponseAthanasia SignUpNewUser(UserClient newUser, String newPasswd){
-        ResponseAthanasia responseAth = new ResponseAthanasia(false, "An unexpected error ocurred");
+    public static ResponseAthanasia_MSJM SignUpNewUser(UserClient newUser, String newPasswd){
+        ResponseAthanasia_MSJM responseAth = new ResponseAthanasia_MSJM(false, "An unexpected error ocurred");
         HttpURLConnection connection = null;
         try{
             URL url = new URL(URLs.SIGN_UP);

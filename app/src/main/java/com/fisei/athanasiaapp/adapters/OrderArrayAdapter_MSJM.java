@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import com.fisei.athanasiaapp.OrderDetailsActivity_MSJM;
 import com.fisei.athanasiaapp.R;
-import com.fisei.athanasiaapp.objects.Order;
+import com.fisei.athanasiaapp.objects.Order_MSJM;
 import com.fisei.athanasiaapp.utilities.Utils;
 
 import java.util.List;
 
-public class OrderArrayAdapter extends ArrayAdapter<Order> {
+public class OrderArrayAdapter_MSJM extends ArrayAdapter<Order_MSJM> {
     private static class ViewHolder{
         TextView orderDateView;
         TextView orderIDView;
@@ -24,12 +24,12 @@ public class OrderArrayAdapter extends ArrayAdapter<Order> {
         Button orderInfoBtn;
     }
 
-    public OrderArrayAdapter(Context context, List<Order> orderList) {
-        super(context, -1, orderList);
+    public OrderArrayAdapter_MSJM(Context context, List<Order_MSJM> orderMSJMList) {
+        super(context, -1, orderMSJMList);
     }
 
     public View getView(int position, View convertView, ViewGroup parent){
-        Order order = getItem(position);
+        Order_MSJM orderMSJM = getItem(position);
         ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
@@ -43,21 +43,21 @@ public class OrderArrayAdapter extends ArrayAdapter<Order> {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.orderDateView.setText(Utils.ConvertDate(order.Date));
-        viewHolder.orderIDView.setText(String.format("%s", order.ID));
-        viewHolder.orderTotalView.setText(String.format("%s", order.Total + " $"));
+        viewHolder.orderDateView.setText(Utils.ConvertDate(orderMSJM.Date));
+        viewHolder.orderIDView.setText(String.format("%s", orderMSJM.ID));
+        viewHolder.orderTotalView.setText(String.format("%s", orderMSJM.Total + " $"));
         viewHolder.orderInfoBtn.setOnClickListener(view -> {
-            ShowOrderDetails(order);
+            ShowOrderDetails(orderMSJM);
         });
         return convertView;
     }
 
-    private void ShowOrderDetails(Order order){
+    private void ShowOrderDetails(Order_MSJM orderMSJM){
         Intent orderDetails = new Intent(getContext(), OrderDetailsActivity_MSJM.class);
-        orderDetails.putExtra("orderID", order.ID);
-        orderDetails.putExtra("orderUserClient", order.UserClientID);
-        orderDetails.putExtra("orderDate", order.Date);
-        orderDetails.putExtra("orderTotal", order.Total);
+        orderDetails.putExtra("orderID", orderMSJM.ID);
+        orderDetails.putExtra("orderUserClient", orderMSJM.UserClientID);
+        orderDetails.putExtra("orderDate", orderMSJM.Date);
+        orderDetails.putExtra("orderTotal", orderMSJM.Total);
         getContext().startActivity(orderDetails);
     }
 }

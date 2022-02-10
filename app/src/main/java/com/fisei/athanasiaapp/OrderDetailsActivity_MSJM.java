@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fisei.athanasiaapp.adapters.OrderDetailsArrayAdapter;
-import com.fisei.athanasiaapp.adapters.ProductArrayAdapter;
-import com.fisei.athanasiaapp.objects.Order;
+import com.fisei.athanasiaapp.adapters.OrderDetailsArrayAdapter_MSJM;
 import com.fisei.athanasiaapp.objects.OrderDetail;
 import com.fisei.athanasiaapp.objects.Product;
 import com.fisei.athanasiaapp.services.ProductService;
@@ -32,7 +30,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
     private TextView textViewOrderTotalIVA;
     private ListView listViewOrderDetails;
 
-    private OrderDetailsArrayAdapter orderArrayAdapter;
+    private OrderDetailsArrayAdapter_MSJM orderArrayAdapter;
 
     Bundle bundle;
     private List<OrderDetail> orderDetails = new ArrayList<>();
@@ -45,7 +43,7 @@ public class OrderDetailsActivity_MSJM extends AppCompatActivity {
         bundle = getIntent().getExtras();
         orderID = bundle.getInt("orderID");
         InitializeViewComponents();
-        orderArrayAdapter = new OrderDetailsArrayAdapter(this, orderDetails);
+        orderArrayAdapter = new OrderDetailsArrayAdapter_MSJM(this, orderDetails);
 
         GetOrderDetailsTask getOrderDetailsTask = new GetOrderDetailsTask();
         getOrderDetailsTask.execute();

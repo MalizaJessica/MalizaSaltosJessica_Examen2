@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.UserClient;
 import com.fisei.athanasiaapp.services.UserClientService;
 import com.google.android.material.navigation.NavigationView;
@@ -46,7 +46,7 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-        if(AthanasiaGlobal.ADMIN_PRIVILEGES){
+        if(AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES){
             Menu menuNav=navigationView.getMenu();
             menuNav.removeItem(R.id.nav_shop_cart);
         }
@@ -73,15 +73,15 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
     private class GetUserClientInfoTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            String tempToken = AthanasiaGlobal.ACTUAL_USER.JWT;
-            AthanasiaGlobal.ACTUAL_USER = UserClientService.GetUserInfoByID(AthanasiaGlobal.ACTUAL_USER.ID);
-            AthanasiaGlobal.ACTUAL_USER.JWT = tempToken;
+            String tempToken = AthanasiaGlobal_MSJM.ACTUAL_USER.JWT;
+            AthanasiaGlobal_MSJM.ACTUAL_USER = UserClientService.GetUserInfoByID(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
+            AthanasiaGlobal_MSJM.ACTUAL_USER.JWT = tempToken;
             return null;
         }
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             //Las vistas no pueden ser editadas en un hilo diferente al main
-            if(AthanasiaGlobal.ADMIN_PRIVILEGES){
+            if(AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES){
                 ShowAdminInfo();
             } else {
                 ShowUserInfo();
@@ -92,9 +92,9 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
 
     private void ShowUserInfo(){
         TextView userName = (TextView) findViewById(R.id.textViewUserName);
-        userName.setText(AthanasiaGlobal.ACTUAL_USER.Name);
+        userName.setText(AthanasiaGlobal_MSJM.ACTUAL_USER.Name);
         TextView userEmail = (TextView) findViewById(R.id.textViewUserEmail);
-        userEmail.setText(AthanasiaGlobal.ACTUAL_USER.Email);
+        userEmail.setText(AthanasiaGlobal_MSJM.ACTUAL_USER.Email);
     }
     private void ShowAdminInfo(){
         TextView userName = (TextView) findViewById(R.id.textViewUserName);
@@ -103,9 +103,9 @@ public class AthanasiaActivity_MSJM extends AppCompatActivity {
         userEmail.setText("ADMIN");
     }
     private void LogOut(){
-        AthanasiaGlobal.ACTUAL_USER = new UserClient();
-        AthanasiaGlobal.ADMIN_PRIVILEGES = false;
-        AthanasiaGlobal.SHOPPING_CART = new ArrayList<>();
+        AthanasiaGlobal_MSJM.ACTUAL_USER = new UserClient();
+        AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES = false;
+        AthanasiaGlobal_MSJM.SHOPPING_CART = new ArrayList<>();
         Intent login = new Intent(this, LoginActivity_MSJM.class);
         startActivity(login);
         finish();

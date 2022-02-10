@@ -1,10 +1,10 @@
 package com.fisei.athanasiaapp.models;
 
-public class ResponseAthanasia {
+public class ResponseAthanasia_MSJM {
     public boolean Success;
     public String Message;
 
-    public ResponseAthanasia(Boolean success, String message){
+    public ResponseAthanasia_MSJM(Boolean success, String message){
         this.Success = success;
         this.Message = message;
     }

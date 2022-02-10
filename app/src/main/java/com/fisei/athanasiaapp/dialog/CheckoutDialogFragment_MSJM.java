@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import com.fisei.athanasiaapp.ui.ShopCartFragment;
 
-public class CheckoutDialogFragment extends AppCompatDialogFragment {
+public class CheckoutDialogFragment_MSJM extends AppCompatDialogFragment {
     public Boolean button = false;
     @NonNull
     @Override

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fisei.athanasiaapp.models.ResponseAthanasia;
+import com.fisei.athanasiaapp.models.ResponseAthanasia_MSJM;
 import com.fisei.athanasiaapp.objects.UserClient;
 import com.fisei.athanasiaapp.services.UserClientService;
 
@@ -27,7 +27,7 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
     private EditText editTextPassword;
     private TextView errorTextView;
     private Button buttonSignUp;
-    private ResponseAthanasia responseTask = new ResponseAthanasia(false, "");
+    private ResponseAthanasia_MSJM responseTask = new ResponseAthanasia_MSJM(false, "");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

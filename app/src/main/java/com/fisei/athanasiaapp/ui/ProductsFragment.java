@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.fisei.athanasiaapp.R;
-import com.fisei.athanasiaapp.adapters.ProductArrayAdapter;
+import com.fisei.athanasiaapp.adapters.ProductArrayAdapter_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
 import com.fisei.athanasiaapp.services.ProductService;
 
@@ -24,7 +24,7 @@ import java.util.List;
 public class ProductsFragment extends Fragment {
 
     private List<Product> productList = new ArrayList<>();
-    private ProductArrayAdapter productArrayAdapter;
+    private ProductArrayAdapter_MSJM productArrayAdapterMSJM;
 
     private ListView listView;
 
@@ -45,7 +45,7 @@ public class ProductsFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         listView = (ListView) view.findViewById(R.id.listViewProductFragment);
-        productArrayAdapter = new ProductArrayAdapter(getContext(), QuitProductsWith0Qty(productList));
+        productArrayAdapterMSJM = new ProductArrayAdapter_MSJM(getContext(), QuitProductsWith0Qty(productList));
         GetProductsTask getProductsTask = new GetProductsTask();
         getProductsTask.execute();
 
@@ -62,10 +62,10 @@ public class ProductsFragment extends Fragment {
         }
         @Override
         protected void onPostExecute(JSONObject jsonObject){
-            productArrayAdapter.clear();
-            productArrayAdapter.addAll(QuitProductsWith0Qty(productList));
-            productArrayAdapter.notifyDataSetChanged();
-            listView.setAdapter(productArrayAdapter);
+            productArrayAdapterMSJM.clear();
+            productArrayAdapterMSJM.addAll(QuitProductsWith0Qty(productList));
+            productArrayAdapterMSJM.notifyDataSetChanged();
+            listView.setAdapter(productArrayAdapterMSJM);
         }
     }
     private List<Product> QuitProductsWith0Qty(List<Product> list){

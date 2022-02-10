@@ -15,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fisei.athanasiaapp.R;
-import com.fisei.athanasiaapp.adapters.ShopItemArrayAdapter;
-import com.fisei.athanasiaapp.dialog.CheckoutDialogFragment;
-import com.fisei.athanasiaapp.models.SaleDetails;
-import com.fisei.athanasiaapp.models.SaleRequest;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
+import com.fisei.athanasiaapp.adapters.ShopItemArrayAdapter_MSJM;
+import com.fisei.athanasiaapp.dialog.CheckoutDialogFragment_MSJM;
+import com.fisei.athanasiaapp.models.SaleDetails_MSJM;
+import com.fisei.athanasiaapp.models.SaleRequest_MSJM;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.ShopCartItem;
 import com.fisei.athanasiaapp.services.SaleService;
 import com.fisei.athanasiaapp.services.ShoppingCartService;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ShopCartFragment extends Fragment {
 
-    private ShopItemArrayAdapter itemArrayAdapter;
+    private ShopItemArrayAdapter_MSJM itemArrayAdapter;
     private ListView listView;
     private TextView total;
     private Button checkout;
@@ -56,12 +56,12 @@ public class ShopCartFragment extends Fragment {
         saveCart = view.findViewById(R.id.btnSaveCart);
         listView = (ListView) view.findViewById(R.id.listViewShopCartFragment);
         total = (TextView) view.findViewById(R.id.textViewTotalShop);
-        itemArrayAdapter = new ShopItemArrayAdapter(getContext(), list);
+        itemArrayAdapter = new ShopItemArrayAdapter_MSJM(getContext(), list);
 
         checkout.setOnClickListener(view1 -> { OpenDialog(); });
         saveCart.setOnClickListener(view1 -> { ExecuteSaveCartTask();});
         itemArrayAdapter.clear();
-        list = AthanasiaGlobal.SHOPPING_CART;
+        list = AthanasiaGlobal_MSJM.SHOPPING_CART;
         itemArrayAdapter.addAll(list);
         itemArrayAdapter.notifyDataSetChanged();
         listView.setAdapter(itemArrayAdapter);
@@ -85,7 +85,7 @@ public class ShopCartFragment extends Fragment {
     }
     private void UpdateTotalView(TextView totalView){
         double total = 0;
-        for (ShopCartItem item: AthanasiaGlobal.SHOPPING_CART) {
+        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             total += item.UnitPrice * item.Quantity;
         }
         total *= 1.1;
@@ -93,7 +93,7 @@ public class ShopCartFragment extends Fragment {
     }
     private void OpenDialog(){
         Bundle bundleDialog = new Bundle();
-        CheckoutDialogFragment dialog = new CheckoutDialogFragment();
+        CheckoutDialogFragment_MSJM dialog = new CheckoutDialogFragment_MSJM();
         dialog.setTargetFragment(getTargetFragment(), 0);
         bundleDialog.putString("title", "Are you sure?");
         dialog.show(this.getChildFragmentManager(), "Quiz Results");
@@ -110,22 +110,22 @@ public class ShopCartFragment extends Fragment {
     class AddSaleTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            SaleRequest sale = new SaleRequest();
-            List<SaleDetails> details = new ArrayList<>();
-            for (ShopCartItem item: AthanasiaGlobal.SHOPPING_CART) {
-                details.add(new SaleDetails(item.Id, item.Quantity));
+            SaleRequest_MSJM sale = new SaleRequest_MSJM();
+            List<SaleDetails_MSJM> details = new ArrayList<>();
+            for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
+                details.add(new SaleDetails_MSJM(item.Id, item.Quantity));
             }
-            sale.UserClientID = AthanasiaGlobal.ACTUAL_USER.ID;
-            sale.SaleDetails = details;
+            sale.UserClientID = AthanasiaGlobal_MSJM.ACTUAL_USER.ID;
+            sale.SaleDetails_MSJM = details;
             SuccesfulSale = SaleService.AddNewSale(sale);
-            ShoppingCartService.DeleteCart(AthanasiaGlobal.ACTUAL_USER.ID);
+            ShoppingCartService.DeleteCart(AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             return null;
         }
         @Override
         protected void onPostExecute(JSONObject jsonObject){
             if(SuccesfulSale){
                 Toast.makeText(getContext(), "Succesful Sale", Toast.LENGTH_SHORT).show();
-                AthanasiaGlobal.SHOPPING_CART.clear();
+                AthanasiaGlobal_MSJM.SHOPPING_CART.clear();
                 itemArrayAdapter.UpdateArrayAdapter();
             } else {
                 Toast.makeText(getContext(), "Failed Sale", Toast.LENGTH_SHORT).show();
@@ -136,7 +136,7 @@ public class ShopCartFragment extends Fragment {
     class SaveCartTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... params) {
-            SuccesfulSale = ShoppingCartService.SaveCart(AthanasiaGlobal.SHOPPING_CART, AthanasiaGlobal.ACTUAL_USER.ID);
+            SuccesfulSale = ShoppingCartService.SaveCart(AthanasiaGlobal_MSJM.SHOPPING_CART, AthanasiaGlobal_MSJM.ACTUAL_USER.ID);
             return null;
         }
         @Override

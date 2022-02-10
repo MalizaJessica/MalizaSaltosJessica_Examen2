@@ -16,12 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fisei.athanasiaapp.R;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
 import com.fisei.athanasiaapp.objects.ShopCartItem;
 import com.fisei.athanasiaapp.services.ImageService;
 
-public class ProductArrayAdapter extends ArrayAdapter<Product> {
+public class ProductArrayAdapter_MSJM extends ArrayAdapter<Product> {
 
     /*Define los atributos de las vistas de los productos.
         Un ImageView para la imagen del producto y TextViews para campos
@@ -38,7 +38,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
     //Renderizar la imagen.
     private final Map<String, Bitmap> bitmaps = new HashMap<>();
     //Constructor
-    public ProductArrayAdapter(Context context, List<Product> productsList){
+    public ProductArrayAdapter_MSJM(Context context, List<Product> productsList){
         super(context, -1, productsList);
     }
     public View getView(int position, View convertView, ViewGroup parent){
@@ -92,7 +92,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
             btn.setEnabled(b);
     }
     private Boolean RememberIfButtonWasSelected(int id){
-        for (ShopCartItem item: AthanasiaGlobal.SHOPPING_CART) {
+        for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
             if (item.Id == id) {
                 return false;
             }
@@ -100,7 +100,7 @@ public class ProductArrayAdapter extends ArrayAdapter<Product> {
         return true;
     }
     private void AddToShoppingCart(Product p){
-        AthanasiaGlobal.SHOPPING_CART.add(new ShopCartItem(p.id, p.name, p.imageURL, 1, p.unitPrice, p.quantity));
+        AthanasiaGlobal_MSJM.SHOPPING_CART.add(new ShopCartItem(p.id, p.name, p.imageURL, 1, p.unitPrice, p.quantity));
         Toast.makeText(getContext(), "Item " + p.name + " added to cart", Toast.LENGTH_SHORT).show();
     }
 }

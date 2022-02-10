@@ -1,8 +1,6 @@
 package com.fisei.athanasiaapp.services;
 
-import com.fisei.athanasiaapp.models.SaleDetails;
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
-import com.fisei.athanasiaapp.objects.Order;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.ShopCartItem;
 import com.fisei.athanasiaapp.utilities.URLs;
 
@@ -27,7 +25,7 @@ public class ShoppingCartService {
         try{
             URL url = new URL(URLs.SHOPPING_CART + "/" + user);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
             if(responseCode == HttpURLConnection.HTTP_OK){
@@ -61,7 +59,7 @@ public class ShoppingCartService {
             URL url = new URL(URLs.SHOPPING_CART + "/" + user);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("DELETE");
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
 
             int responseCode = connection.getResponseCode();
             StringBuilder response = new StringBuilder();
@@ -92,7 +90,7 @@ public class ShoppingCartService {
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; utf-8");
             connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal.ACTUAL_USER.JWT);
+            connection.setRequestProperty("Authorization","Bearer " + AthanasiaGlobal_MSJM.ACTUAL_USER.JWT);
             connection.setDoInput(true);
             String jsonInputPart1 = "{\"IDUserClient\": " + user + ",\"ShopCartDetails\":[";
             StringBuilder jsonInputPart2 = new StringBuilder();

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.fisei.athanasiaapp.objects.AthanasiaGlobal;
+import com.fisei.athanasiaapp.objects.AthanasiaGlobal_MSJM;
 import com.fisei.athanasiaapp.objects.Product;
 import com.fisei.athanasiaapp.objects.ShopCartItem;
 import com.fisei.athanasiaapp.objects.UserClient;
@@ -60,8 +60,8 @@ public class LoginActivity_MSJM extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             if(user.JWT != null){
-                AthanasiaGlobal.ACTUAL_USER.JWT = user.JWT;
-                AthanasiaGlobal.ACTUAL_USER.ID = user.ID;
+                AthanasiaGlobal_MSJM.ACTUAL_USER.JWT = user.JWT;
+                AthanasiaGlobal_MSJM.ACTUAL_USER.ID = user.ID;
                 GetUserCartTask getUserCartTask = new GetUserCartTask();
                 getUserCartTask.execute();
             } else {
@@ -79,8 +79,8 @@ public class LoginActivity_MSJM extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             if(user.JWT != null){
-                AthanasiaGlobal.ACTUAL_USER.JWT = user.JWT;
-                AthanasiaGlobal.ADMIN_PRIVILEGES = true;
+                AthanasiaGlobal_MSJM.ACTUAL_USER.JWT = user.JWT;
+                AthanasiaGlobal_MSJM.ADMIN_PRIVILEGES = true;
                 StartAthanasiaActivity();
             } else {
                 warningTextView.setText(R.string.label_wrong_email_password);
@@ -90,16 +90,16 @@ public class LoginActivity_MSJM extends AppCompatActivity {
     private class GetUserCartTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
         protected JSONObject doInBackground(URL... urls) {
-            AthanasiaGlobal.SHOPPING_CART = ShoppingCartService.GetShopCartFromUserLogged(user.ID);
+            AthanasiaGlobal_MSJM.SHOPPING_CART = ShoppingCartService.GetShopCartFromUserLogged(user.ID);
             List<ShopCartItem> tempList = new ArrayList<>();
-            for (ShopCartItem item: AthanasiaGlobal.SHOPPING_CART) {
+            for (ShopCartItem item: AthanasiaGlobal_MSJM.SHOPPING_CART) {
                 Product p = ProductService.GetSpecifiedProductByID(item.Id);
                 if(p.quantity < item.Quantity){
                     item.Quantity = 1;
                 }
                 tempList.add(new ShopCartItem(p.id, p.name, p.imageURL, item.Quantity, p.unitPrice, p.quantity));
             }
-            AthanasiaGlobal.SHOPPING_CART = tempList;
+            AthanasiaGlobal_MSJM.SHOPPING_CART = tempList;
             return null;
         }
         @Override
