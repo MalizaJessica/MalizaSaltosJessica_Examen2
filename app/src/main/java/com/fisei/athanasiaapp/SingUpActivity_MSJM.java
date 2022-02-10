@@ -88,7 +88,7 @@ public class SingUpActivity_MSJM extends AppCompatActivity {
                             errorTextView.setText("La contrasenia debe tener letras mayusculas");
                             return false;
                         } else {
-                            if (!password.matches("(?=.*[*?¡!#$%&])")) {
+                            if (!password.matches("(?=.*[*?¡!#$%&/])")) {
                                 errorTextView.setText("La contrasenia debe tener caracter especial");
                                 return false;
                             }
