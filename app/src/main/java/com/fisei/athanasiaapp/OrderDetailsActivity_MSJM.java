@@ -22,7 +22,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailsActivity extends AppCompatActivity {
+public class OrderDetailsActivity_MSJM extends AppCompatActivity {
     private int orderID = 0;
 
     private TextView textViewOrderID;

@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 import java.net.URL;
 
-public class SingUpActivity extends AppCompatActivity {
+public class SingUpActivity_MSJM extends AppCompatActivity {
 
     private EditText editTextEmail;
     private EditText editTextName;
@@ -77,7 +77,7 @@ public class SingUpActivity extends AppCompatActivity {
         }
     }
     private void StartLoginActivity(){
-        Intent backLogin = new Intent(this, LoginActivity.class);
+        Intent backLogin = new Intent(this, LoginActivity_MSJM.class);
         startActivity(backLogin);
         Toast.makeText(this, "Your register was successful", Toast.LENGTH_SHORT).show();
     }

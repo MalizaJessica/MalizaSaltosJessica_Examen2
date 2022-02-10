@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.fisei.athanasiaapp.OrderDetailsActivity;
+import com.fisei.athanasiaapp.OrderDetailsActivity_MSJM;
 import com.fisei.athanasiaapp.R;
 import com.fisei.athanasiaapp.objects.Order;
 import com.fisei.athanasiaapp.utilities.Utils;
@@ -53,7 +53,7 @@ public class OrderArrayAdapter extends ArrayAdapter<Order> {
     }
 
     private void ShowOrderDetails(Order order){
-        Intent orderDetails = new Intent(getContext(), OrderDetailsActivity.class);
+        Intent orderDetails = new Intent(getContext(), OrderDetailsActivity_MSJM.class);
         orderDetails.putExtra("orderID", order.ID);
         orderDetails.putExtra("orderUserClient", order.UserClientID);
         orderDetails.putExtra("orderDate", order.Date);

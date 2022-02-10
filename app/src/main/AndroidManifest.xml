@@ -14,18 +14,18 @@
         android:theme="@style/Theme.AthanasiaApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OrderDetailsActivity"
+            android:name=".OrderDetailsActivity_MSJM"
             android:exported="false" />
         <activity
-            android:name=".SingUpActivity"
+            android:name=".SingUpActivity_MSJM"
             android:exported="false" />
         <activity
-            android:name=".AthanasiaActivity"
+            android:name=".AthanasiaActivity_MSJM"
             android:exported="false"
             android:label="@string/title_activity_athanasia"
             android:theme="@style/Theme.AthanasiaApp.NoActionBar" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginActivity_MSJM"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivity_MSJM"
             android:exported="true" />
     </application>
 
